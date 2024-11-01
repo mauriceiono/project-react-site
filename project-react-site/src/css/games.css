@@ -1,0 +1,83 @@
+.games, .genres, .recent-releases {
+    text-align: center; /* Centering section content */
+    padding: 20px;
+    margin: 20px 0; /* Added margin for spacing between sections */
+}
+
+.game-list {
+    display: flex; /* Using flexbox for game cards layout */
+    flex-wrap: wrap; /* Allowing cards to wrap to the next line */
+    justify-content: center; /* Centering cards horizontally */
+    gap: 20px; /* Added gap between cards */
+}
+
+.game-card {
+    background-color: #f9f9f9; /* Light background for cards */
+    border: 1px solid #ddd; /* Light border for separation */
+    border-radius: 8px; /* Rounded corners */
+    margin: 15px; /* Spacing between cards */
+    padding: 15px; /* Padding inside cards */
+    width: 220px; /* Slightly adjusted width for better fit */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Added transition effects */
+}
+
+.game-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.game-image {
+    max-width: 100%; /* Responsive image size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+.game-description {
+    margin-top: 10px; /* Space between image and description */
+    font-size: 0.9em; /* Smaller font for description */
+    color: var(--text-color); /* Use general text color for consistency */
+}
+
+.releases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.release-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    display: 100px; /* Make the release-card a flex container */
+}
+
+.release-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.release-card img {
+    margin-top: auto;
+    max-width: 100%;
+    height: 200px; /* Made game images fixed height */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.release-card h3 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+}
+
+.release-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.release-card img {
+    margin-top: auto; /* Pushes the image towards the release date text */
+}
