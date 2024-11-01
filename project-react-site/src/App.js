@@ -10,7 +10,7 @@ import About from './pages/About';
 
 function App() {
     return (
-        <BrowserRouter basename="/project-react-site">
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className="App">
                 <Header />
                 <Routes>
