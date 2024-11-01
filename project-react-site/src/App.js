@@ -1,16 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Characters from './pages/Characters';
-import CharacterDetails from '../src/pages/Characterdetails';
+import CharacterDetails from './pages/Characterdetails';
 import Games from './pages/Games';
 import About from './pages/About';
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className="App">
                 <Header />
                 <Routes>
@@ -22,7 +22,7 @@ function App() {
                 </Routes>
                 <Footer />
             </div>
-        </Router>
+        </BrowserRouter>
     );
 }
 
