@@ -60,11 +60,6 @@ header nav ul li a:hover {
     background-color: white;
 }
 
-.character-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
 
 .character-card {
     background: white;

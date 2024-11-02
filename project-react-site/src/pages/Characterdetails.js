@@ -1,6 +1,7 @@
 // src/pages/CharacterDetails.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import '../css/Characterdetails.css';
 
 const characterData = [
     {
@@ -99,7 +100,7 @@ const CharacterDetails = () => {
 
     return (
         <div className="character-details">
-            <img src={character.image} alt={character.name} />
+           <img src={`/project-react-site/${character.image}`} alt={character.name} />
             <h1>{character.name}</h1>
             <h2>Game: {character.game}</h2>
             <p><strong>Description:</strong> {character.description}</p>
