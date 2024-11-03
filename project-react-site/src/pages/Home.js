@@ -1,25 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/home.css'; // Ensure the correct path to your CSS file
+import '../css/home.css'; 
 
 const characters = [
     {
         id: "mario",
         name: "Mario",
         description: "The beloved plumber who saves the Mushroom Kingdom.",
-        image: "images/mario.jpg"
+        image: "/images/mario.jpg"
     },
     {
         id: "sonic",
         name: "Sonic the Hedgehog",
         description: "The fastest hedgehog who loves adventure.",
-        image: "images/sonic.jpg"
+        image: "/images/sonic.jpg"
     },
     {
         id: "link",
         name: "Link",
         description: "The courageous hero on a quest to save Princess Zelda.",
-        image: "images/link.jpg"
+        image: "/images/link.jpg"
     },
 ];
 
@@ -51,15 +51,15 @@ const Home = () => {
                 <h2>Featured Video Games</h2>
                 <div className="featured-grid">
                     <div className="featured-card">
-                        <img src="images/sonic frontiers.jpg" alt="Sonic Frontiers" />
+                        <img src="/images/sonic frontiers.jpg" alt="Sonic Frontiers" />
                         <p>Sonic Frontiers</p>
                     </div>
                     <div className="featured-card">
-                        <img src="images/gta 6 frre dowload.jpg" alt="GTA 6" />
+                        <img src="/images/gta 6 frre dowload.jpg" alt="GTA 6" />
                         <p>GTA 6</p>
                     </div>
                     <div className="featured-card">
-                        <img src="images/halo 3.jpg" alt="Halo 3" />
+                        <img src="/images/halo 3.jpg" alt="Halo 3" />
                         <p>Halo 3</p>
                     </div>
                 </div>
