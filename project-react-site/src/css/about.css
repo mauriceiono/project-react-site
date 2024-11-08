@@ -32,7 +32,7 @@ form {
 
 .contact-form, .contact-info {
     flex: 1;
-    min-width: 45%; /* Adjust this based on your page width */
+    min-width: 45%; 
     margin: 20px;
 }
 
