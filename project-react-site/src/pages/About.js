@@ -11,7 +11,7 @@ const About = () => {
         e.preventDefault();
 
         // Adjust the URL to match the correct API endpoint from the server
-        const response = await fetch('http://localhost:3000/send', {
+        const response = await fetch('https://project-react-site-server.onrender.com/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, message })
