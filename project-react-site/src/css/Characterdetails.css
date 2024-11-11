@@ -12,6 +12,7 @@
 .character-details img {
     max-width: 100%;
     height: auto;
+    justify-content: center;
     border-radius: 8px;
     margin-bottom: 20px;
 }
