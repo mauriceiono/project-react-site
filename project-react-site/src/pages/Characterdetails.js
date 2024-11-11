@@ -18,7 +18,7 @@ const CharacterDetails = () => {
 
     return (
         <div className="character-details">
-            <img src={character.image} alt={character.name} />
+            <img src={`https://project-react-site-server.onrender.com${character.image}`} alt={character.name} />
             <h1>{character.name}</h1>
             <h2>Game: {character.game}</h2>
             <p><strong>Description:</strong> {character.description}</p>
@@ -28,4 +28,4 @@ const CharacterDetails = () => {
     );
 };
 
-export default CharacterDetails;  // Make sure this line is included
+export default CharacterDetails;  
