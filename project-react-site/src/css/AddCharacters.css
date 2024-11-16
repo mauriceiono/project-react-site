@@ -1,0 +1,48 @@
+
+.add-character-page {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .add-character-page h1 {
+    text-align: center;
+  }
+  
+  .add-character-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #008cff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #9a0ee1;
+  }
+  

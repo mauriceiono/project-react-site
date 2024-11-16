@@ -64,9 +64,13 @@ const Characters = () => (
         {/* Characters title Section */}
         <section className="characters-section">
             <h1>Video Game Characters</h1>
+            <div className="center-container">
             <p className="page-description">
-                Explore iconic video game characters across different universes. Click on any character to learn more about their abilities, background, and role in their game.
+                Explore iconic video game characters across different universes. Click on any character to learn more about their abilities, background, and role in their game. or add your own
             </p>
+            <Link to="/add-character" className="add-character-button"> Add New Character</Link>
+            <Link to="/added-characters" className="add-character-button"> New CharacterList</Link>
+         </div>
         </section>
 
         <div className="character-grid">

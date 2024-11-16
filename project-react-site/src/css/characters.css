@@ -99,3 +99,13 @@ footer {
     text-align: center;
     padding: 15px;
 }
+.center-container {
+    display: grid;
+    place-items: center; /* This will center the items both horizontally and vertically */
+    text-align: center;
+  }
+  
+  .add-character-button {
+    margin-top: 20px; /* Optional: Adds some space between the paragraph and the link */
+  }
+  
