@@ -13,17 +13,22 @@ const Header = () => {
     return (
         <header>
             <h1>Video Game Character Hub</h1>
-            <button className="hamburger" onClick={toggleMenu}>
-                ☰
-            </button>
-            <nav className={`nav-list ${isMenuOpen ? 'open' : ''}`}>
-                <ul>
-                    <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-                    <li><Link to="/characters" onClick={toggleMenu}>Characters</Link></li>
-                    <li><Link to="/games" onClick={toggleMenu}>Games</Link></li>
-                    <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
-                </ul>
-            </nav>
+            <button
+    className="hamburger"
+    onClick={toggleMenu}
+    aria-expanded={isMenuOpen}
+    aria-controls="nav-list"
+>
+    ☰
+</button>
+<nav id="nav-list" className={`nav-list ${isMenuOpen ? 'open' : ''}`}>
+    <ul>
+        <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
+        <li><Link to="/characters" onClick={toggleMenu}>Characters</Link></li>
+        <li><Link to="/games" onClick={toggleMenu}>Games</Link></li>
+        <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
+    </ul>
+</nav>
         </header>
     );
 };
