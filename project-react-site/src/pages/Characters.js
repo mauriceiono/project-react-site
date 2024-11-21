@@ -70,6 +70,8 @@ const Characters = () => (
             </p>
             <Link to="/add-character" className="add-character-button"> Add New Character</Link>
             <Link to="/added-characters" className="add-character-button"> New CharacterList</Link>
+            <Link to="/edit-character" className="add-character-button">Edit Character</Link>
+                <Link to="/delete-character" className="add-character-button">Delete Character</Link>
          </div>
         </section>
 

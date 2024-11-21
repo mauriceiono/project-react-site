@@ -9,6 +9,8 @@ import Games from './pages/Games';
 import About from './pages/About';
 import AddCharacter from './pages/AddCharacters'; 
 import AddedCharacterList from './pages/AddedCharacterList';
+import EditCharacter from './pages/EditPage';  
+import DeleteCharacter from './pages/DeletePage';
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/add-character" element={<AddCharacter />} /> 
                     <Route path="/added-characters" element={<AddedCharacterList />} />
+                    <Route path="/edit-character" element={<EditCharacter />} /> {/* Route for Edit */}
+                    <Route path="/delete-character" element={<DeleteCharacter />} />
                 </Routes>
                 <Footer />
             </div>
