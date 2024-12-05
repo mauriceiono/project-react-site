@@ -34,7 +34,8 @@ const AddCharacter = () => {
         alert('Character added successfully!');
         navigate('/characters-list');
       } else {
-        alert('Error: Could not add character.');
+        const result = await response.json();
+        alert(result.message || 'Error: Could not add character.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);

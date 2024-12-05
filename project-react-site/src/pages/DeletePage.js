@@ -7,7 +7,6 @@ const DeleteCharacterPage = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        // Fetch characters from both endpoints
         const addedCharactersResponse = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
         const characterListResponse = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
 
@@ -18,7 +17,6 @@ const DeleteCharacterPage = () => {
         const addedCharacters = await addedCharactersResponse.json();
         const characterList = await characterListResponse.json();
 
-        // Combine both lists
         setCharacters([...addedCharacters, ...characterList]);
       } catch (error) {
         setError(error.message);
@@ -30,13 +28,11 @@ const DeleteCharacterPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      // Try to delete from added characters first
       let response = await fetch(`https://project-react-site-server.onrender.com/api/addedcharacters/${id}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        // If not found, delete from hardcoded characters (if applicable)
         response = await fetch(`https://project-react-site-server.onrender.com/api/CharacterList/${id}`, {
           method: 'DELETE',
         });
@@ -46,7 +42,6 @@ const DeleteCharacterPage = () => {
         }
       }
 
-      // Remove the deleted character from the list in local state
       setCharacters((prevCharacters) => prevCharacters.filter((character) => character.id !== id));
     } catch (error) {
       setError(error.message);
@@ -60,8 +55,6 @@ const DeleteCharacterPage = () => {
   return (
     <div>
       <h1>Delete Character</h1>
-
-      {/* Character List with Delete Button */}
       <div>
         <h2>Select a Character to Delete</h2>
         <ul>
