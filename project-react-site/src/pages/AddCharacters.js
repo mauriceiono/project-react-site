@@ -16,16 +16,13 @@ const AddCharacter = () => {
       return;
     }
 
-    const id = name.toLowerCase().replace(/\s+/g, '-');
-
     const formData = new FormData();
-    formData.append('id', id);
     formData.append('name', name);
     formData.append('description', description);
     formData.append('image', image);
 
     try {
-      const response = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters', {
+      const response = await fetch('https://project-react-site-server.onrender.com/api/CharacterList', {
         method: 'POST',
         body: formData,
       });

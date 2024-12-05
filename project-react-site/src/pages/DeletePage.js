@@ -7,13 +7,12 @@ const DeleteCharacterPage = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const addedCharactersResponse = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
-        const characterListResponse = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
-
-        const addedCharacters = addedCharactersResponse.ok ? await addedCharactersResponse.json() : [];
-        const characterList = characterListResponse.ok ? await characterListResponse.json() : [];
-
-        setCharacters([...addedCharacters, ...characterList]);
+        const response = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
+        if (!response.ok) {
+          throw new Error('Failed to fetch characters.');
+        }
+        const data = await response.json();
+        setCharacters(data);
       } catch (error) {
         setError(error.message);
       }
@@ -24,18 +23,12 @@ const DeleteCharacterPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      let response = await fetch(`https://project-react-site-server.onrender.com/api/addedcharacters/${id}`, {
+      const response = await fetch(`https://project-react-site-server.onrender.com/api/CharacterList/${id}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        response = await fetch(`https://project-react-site-server.onrender.com/api/CharacterList/${id}`, {
-          method: 'DELETE',
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to delete character.');
-        }
+        throw new Error('Failed to delete character.');
       }
 
       setCharacters((prevCharacters) => prevCharacters.filter((character) => character.id !== id));
