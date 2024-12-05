@@ -10,7 +10,7 @@ const CharacterList = () => {
     useEffect(() => {
         const fetchCharacters = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/CharacterList');
+                const response = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
                 if (!response.ok) {
                     throw new Error('Failed to fetch characters.');
                 }
