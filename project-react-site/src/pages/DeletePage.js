@@ -10,12 +10,8 @@ const DeleteCharacterPage = () => {
         const addedCharactersResponse = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
         const characterListResponse = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
 
-        if (!addedCharactersResponse.ok || !characterListResponse.ok) {
-          throw new Error('Failed to fetch characters.');
-        }
-
-        const addedCharacters = await addedCharactersResponse.json();
-        const characterList = await characterListResponse.json();
+        const addedCharacters = addedCharactersResponse.ok ? await addedCharactersResponse.json() : [];
+        const characterList = characterListResponse.ok ? await characterListResponse.json() : [];
 
         setCharacters([...addedCharacters, ...characterList]);
       } catch (error) {
