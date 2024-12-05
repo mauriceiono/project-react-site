@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EditPage = () => {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  // Fetch characters from the same API used in AddedCharacterList.js
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const response = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
-        if (!response.ok) {
+        const addedCharactersResponse = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
+        const characterListResponse = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
+
+        if (!addedCharactersResponse.ok || !characterListResponse.ok) {
           throw new Error('Failed to fetch characters.');
         }
-        const data = await response.json();
-        setCharacters(data);
+
+        const addedCharacters = await addedCharactersResponse.json();
+        const characterList = await characterListResponse.json();
+
+        setCharacters([...addedCharacters, ...characterList]);
       } catch (error) {
         setError(error.message);
       }
@@ -26,7 +32,7 @@ const EditPage = () => {
     fetchCharacters();
   }, []);
 
-  const handleCharacterSelect = (character) => {
+  const handleEditClick = (character) => {
     setSelectedCharacter(character);
     setName(character.name);
     setDescription(character.description);
@@ -36,39 +42,26 @@ const EditPage = () => {
   const handleSave = async () => {
     if (!selectedCharacter) return;
 
-    // Assuming the server has an API to update characters
-    const updatedCharacter = {
-      id: selectedCharacter.id,
-      name,
-      description,
-      image
-    };
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    if (image instanceof File) {
+      formData.append('image', image);
+    } else {
+      formData.append('image', selectedCharacter.image);
+    }
 
     try {
       const response = await fetch(`https://project-react-site-server.onrender.com/api/addedcharacters/${selectedCharacter.id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedCharacter),
+        body: formData,
       });
 
       if (!response.ok) {
         throw new Error('Failed to update character.');
       }
 
-      // Update the local state after successful save
-      setCharacters((prevCharacters) =>
-        prevCharacters.map((character) =>
-          character.id === selectedCharacter.id ? updatedCharacter : character
-        )
-      );
-
-      // Reset form
-      setSelectedCharacter(null);
-      setName('');
-      setDescription('');
-      setImage('');
+      navigate('/characters-list');
     } catch (error) {
       setError(error.message);
     }
@@ -81,53 +74,57 @@ const EditPage = () => {
   return (
     <div>
       <h1>Edit Character</h1>
-
-      {/* Character Selection */}
-      <div>
-        <h2>Select a Character to Edit</h2>
-        <ul>
-          {characters.map((character) => (
-            <li key={character.id}>
-              <button onClick={() => handleCharacterSelect(character)}>
-                {character.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Edit Form */}
-      {selectedCharacter && (
+      {selectedCharacter ? (
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label>Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Description:</label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Image:</label>
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
+          <button type="button" onClick={handleSave}>
+            Save Changes
+          </button>
+        </form>
+      ) : (
         <div>
-          <h2>Editing: {selectedCharacter.name}</h2>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <label>Name:</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Description:</label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Image URL:</label>
-              <input
-                type="text"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              />
-            </div>
-            <button type="button" onClick={handleSave}>
-              Save Changes
-            </button>
-          </form>
+          <h2>Select a Character to Edit</h2>
+          <ul>
+            {characters.map((character) => (
+              <li key={character.id} style={{ margin: '20px 0' }}>
+                <h3>{character.name}</h3>
+                <p>{character.description}</p>
+                <img
+                  src={character.image}
+                  alt={character.name}
+                  style={{ width: '200px', borderRadius: '10px' }}
+                />
+                <br />
+                <button
+                  onClick={() => handleEditClick(character)}
+                  style={{ backgroundColor: 'blue', color: 'white', padding: '10px', borderRadius: '5px' }}
+                >
+                  Edit
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

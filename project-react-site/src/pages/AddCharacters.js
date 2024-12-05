@@ -1,50 +1,38 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // For redirecting after form submission
+import { useNavigate } from 'react-router-dom';
 import '../css/AddCharacters.css';
 
 const AddCharacter = () => {
-  // State to manage form input
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate that all fields are filled
     if (!name || !description || !image) {
       alert("All fields are required!");
       return;
     }
 
-    // Generate an ID based on the name
-    const id = name.toLowerCase().replace(/\s+/g, '-'); // Convert spaces to hyphens, lowercase
+    const id = name.toLowerCase().replace(/\s+/g, '-');
 
-    // Create a new character object
-    const newCharacter = {
-      id,
-      name,
-      description,
-      image
-    };
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('image', image);
 
     try {
-      const response = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters', { 
+      const response = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newCharacter),
+        body: formData,
       });
 
       if (response.ok) {
-        const result = await response.json();
-        console.log(result);  // Log the response from the server
         alert('Character added successfully!');
-        navigate('/characters');  // Navigate to the characters page after success
+        navigate('/characters-list');
       } else {
         alert('Error: Could not add character.');
       }
@@ -68,7 +56,6 @@ const AddCharacter = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
@@ -78,18 +65,15 @@ const AddCharacter = () => {
             required
           ></textarea>
         </div>
-
         <div className="form-group">
-          <label htmlFor="image">Image URL:</label>
+          <label htmlFor="image">Image:</label>
           <input
-            type="url"
+            type="file"
             id="image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage(e.target.files[0])}
             required
           />
         </div>
-
         <button type="submit">Add Character</button>
       </form>
     </div>

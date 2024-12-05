@@ -4,16 +4,22 @@ const DeleteCharacterPage = () => {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
 
-  // Fetch characters from the same API used in AddedCharacterList.js
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const response = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
-        if (!response.ok) {
+        // Fetch characters from both endpoints
+        const addedCharactersResponse = await fetch('https://project-react-site-server.onrender.com/api/addedcharacters');
+        const characterListResponse = await fetch('https://project-react-site-server.onrender.com/api/CharacterList');
+
+        if (!addedCharactersResponse.ok || !characterListResponse.ok) {
           throw new Error('Failed to fetch characters.');
         }
-        const data = await response.json();
-        setCharacters(data);
+
+        const addedCharacters = await addedCharactersResponse.json();
+        const characterList = await characterListResponse.json();
+
+        // Combine both lists
+        setCharacters([...addedCharacters, ...characterList]);
       } catch (error) {
         setError(error.message);
       }
@@ -24,12 +30,20 @@ const DeleteCharacterPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://project-react-site-server.onrender.com/api/addedcharacters/${id}`, {
+      // Try to delete from added characters first
+      let response = await fetch(`https://project-react-site-server.onrender.com/api/addedcharacters/${id}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete character.');
+        // If not found, delete from hardcoded characters (if applicable)
+        response = await fetch(`https://project-react-site-server.onrender.com/api/CharacterList/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete character.');
+        }
       }
 
       // Remove the deleted character from the list in local state
