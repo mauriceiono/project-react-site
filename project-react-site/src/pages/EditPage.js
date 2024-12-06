@@ -111,7 +111,7 @@ const EditPage = () => {
                 <h3>{character.name}</h3>
                 <p>{character.description}</p>
                 <img
-                  src={character.image}
+                  src={`https://project-react-site-server.onrender.com/${character.image}`}
                   alt={character.name}
                   style={{ width: '200px', borderRadius: '10px' }}
                 />
