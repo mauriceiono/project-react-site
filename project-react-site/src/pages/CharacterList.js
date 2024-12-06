@@ -36,7 +36,7 @@ const CharacterList = () => {
     <div className="character-grid">
       {characters.map((character) => (
         <div key={character.id} className="character-card">
-          <img src={character.image} alt={character.name} />
+          <img src={`https://project-react-site-server.onrender.com/${character.image}`} alt={character.name} />
           <h3>{character.name}</h3>
           <p>{character.description}</p>
           <Link to={`/characters/${character.id}`} className="view-details-link">View Details</Link>
