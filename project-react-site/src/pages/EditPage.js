@@ -36,35 +36,31 @@ const EditPage = () => {
 
   const handleSave = async () => {
     if (!selectedCharacter) return;
-  
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-  
+
     if (image instanceof File) {
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onloadend = async () => {
-        formData.append('image', reader.result.split(',')[1]); // Convert to base64 string
-        await saveCharacter(formData);
-      };
+      formData.append('image', image);
     } else {
       formData.append('image', image);
-      await saveCharacter(formData);
     }
+
+    await saveCharacter(formData);
   };
-  
+
   const saveCharacter = async (formData) => {
     try {
       const response = await fetch(`https://project-react-site-server.onrender.com/api/CharacterList/${selectedCharacter.id}`, {
         method: 'PUT',
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to update character.');
       }
-  
+
       navigate('/characters-list');
     } catch (error) {
       setError(error.message);
